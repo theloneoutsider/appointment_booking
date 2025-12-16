@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block html_attribs %} lang="fa" dir="rtl" {% endblock %}
+
+{% block title %}Appointment Booking Project{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap">
+{% endblock %}
+
+
+{% block page_content %}
+<p>
+    گذشته <span class="color-info" id="color-info-past-time"></span>
+    وقت های خالی <span class="color-info" id="color-info-not-reserved"></span>
+    وقت های رزرو شده توسط کاربر <span class="color-info" id="color-info-self-reserved"></span>
+    وقت های غیرقابل رزرو <span class="color-info" id="color-info-reserved"></span>
+    وقت انتخاب شده <span class="color-info" id="color-info-selected"></span>
+</p>
+
+<table>
+    <tr>
+        <th></th>
+        {% for day in range(week_days | length) %}
+            <th>{{ week_days[day] }} - {{ persian_days[day] }}</th>
+        {% endfor %}
+    </tr>
+    
+    {% for t in range(times | length) %}
+    <tr>
+        <th>{{ times[t] }}</th>
+
+        {% for day in range(week_days | length) %}
+            {% if the_time_table[t][day] == "past-time" %}
+                {% set class_type="past-time" %}
+            {% elif the_time_table[t][day] == "reserved" %}
+                {% set class_type = "reserved"%}
+            {% elif  the_time_table[t][day] == "self-reserved" %}
+                {% set class_type ="self-reserved" %}
+            {% else %}
+                {% set class_type = "not-reserved" %}
+            {% endif %}
+            
+            <td class="item {{ class_type }}" data-date="{{ week_days[day] }}" data-time="{{ times[t] }}">
+            </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+<div id="redirect_div">
+    <a id="redirect" href="">بروزرسانی</a>
+</div>
+{% endblock %}        
+
+
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript">
+$(document).ready(function() {
+    function toPersianDigits(str) {
+        return str.replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
+    }
+
+    // Convert text nodes only, skip script/style/input
+    $('body *').each(function() {
+        if ($(this).children().length === 0) { // only leaf nodes
+            $(this).text(toPersianDigits($(this).text()));
+        }
+    });
+
+    $('.item').on('click', function () {
+        let id = $(this).attr('id');
+        $('.item').removeAttr('id');
+        $(this).attr('id', id === 'selected' ? '' : 'selected')
+
+        if ($(this).attr('id') === 'selected') {
+            redirect_url = "{{ url_for('main.index', _external=True) }}" + $(this).data('date') + "/" + $(this).data('time');
+        } else {
+            redirect_url = "{{ url_for('main.index', _external=True) }}"
+        }
+        $('#redirect').attr('href', redirect_url)
+    });
+
+    $('.reserved').off('click');
+    $('.past-time').off('click')
+});
+</script>
+{% endblock %}

@@ -1,0 +1,103 @@
+body {
+    font-family: 'vazirmatn', sans-serif;
+    font-size: 18px;
+}
+
+th, td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 7px;
+}
+
+a {
+    text-decoration: none;
+}
+
+table {
+    margin: 2em auto;
+}
+
+td a:hover {
+    color: red;
+}
+
+.past-time {
+    background-color: rgb(233, 146, 146);;
+}
+
+.reserved {
+    background-color: rgb(83, 84, 85);
+}
+
+.self-reserved {
+    background-color: rgb(62, 162, 224);
+    cursor: pointer;
+}
+
+.not-reserved {
+    cursor: pointer;
+}
+
+#selected {
+    background-color: rgb(87, 230, 123);
+}
+
+#redirect_div {
+    font-size: 24px;
+    text-align: center;
+    background-color: rgb(161, 159, 159);
+    border: 1px solid rgb(161, 159, 159);
+    border-radius: 12px;
+    width: 250px;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+#redirect_div:hover {
+    background-color: rgb(107, 107, 107);
+    position: relative; /* required for absolute positioning inside */
+}
+
+#redirect_div a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;    /* optional styling */
+}
+
+#redirect_div a:hover {
+    color: white;
+}
+
+.color-info {
+    display: inline-block;
+    border: 1px solid black;
+    width: 1em;
+    height: 1em;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#color-info-reserved {
+    background-color: rgb(83, 84, 85);
+}
+
+#color-info-not-reserved {
+    background-color: white;
+}
+
+#color-info-self-reserved {
+    background-color: rgb(62, 162, 224);
+}
+
+#color-info-selected {
+    background-color: rgb(87, 230, 123);
+}
+
+#color-info-past-time {
+    background-color: rgb(233, 146, 146);;
+}
