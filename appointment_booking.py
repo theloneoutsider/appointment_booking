@@ -5,7 +5,7 @@ from flask_login import LoginManager
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:Ehsan.Artista.1370@localhost/appointment_booking"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:password@localhost/appointment_booking"
 #app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://username:password@localhost/appointment_booking"
 app.config["SECRET_KEY"] = "something secure"
 
